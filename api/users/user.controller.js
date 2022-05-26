@@ -5,7 +5,7 @@ const {
     getUserById,
     updateUser,
     deleteUser,
-  } = require('./users.services');
+  } = require('./user.services');
   
   //const crypto=require('crypto');
   //const { sendMailSendGrid } =require('../../utils/emails');
