@@ -7,17 +7,17 @@ const {
     deleteUser,
   } = require('./user.services');
   
-  //const crypto=require('crypto');
+  const crypto=require('crypto');
   //const { sendMailSendGrid } =require('../../utils/emails');
   
   async function handlerCreateUser(req, res) {
     const newUser = req.body;
     try {
-      //const hash=crypto.createHash('sha256')
-      //.update(newUser.email)
-      //.digest('hex');
-      //newUser.passwordResetToken=hash;
-      //newUser.passwordResetExpires=Date.now()+3600000*24;
+      const hash=crypto.createHash('sha256')
+      .update(newUser.email)
+      .digest('hex');
+      newUser.passwordResetToken=hash;
+      newUser.passwordResetExpires=Date.now()+3600000*24;
   
       const user = await createUser(newUser);
 
