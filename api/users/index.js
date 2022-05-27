@@ -7,7 +7,7 @@ const {
   handlerDeleteUser,
 } = require('./user.controller');
 
-//const { isAuthenticated } = require('../../auth/auth.service');
+const { isAuthenticated } = require('../../auth/auth.service');
 const router = Router();
 router.post('/', handlerCreateUser);
 
