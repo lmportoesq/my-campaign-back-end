@@ -2,6 +2,7 @@ const User = require('./user.model');
 
 async function createUser(user) {
   const newUser = await User.create(user);
+  console.log('Usuario de servicio es',newUser)
   return newUser;
 }
 
