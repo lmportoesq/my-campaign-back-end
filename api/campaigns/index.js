@@ -17,3 +17,4 @@ router.patch('/:id', handlerUpdateCampaign);
 router.delete('/:id', isAuthenticated(), handlerDeleteCampaign);
 
 module.exports = router;
+console.log('Estoy en el index de campaigns llamado por Routes.js')
