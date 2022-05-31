@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
 
 const UserSchema = new mongoose.Schema({
   campaign:{
-    type:Schema.ObjectId,
+    type:ObjectId,
     ref:'Campaigns'
   },
   email: {

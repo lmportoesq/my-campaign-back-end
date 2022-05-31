@@ -4,7 +4,6 @@ const CampaignSchema = new mongoose.Schema({
   campaignType: {
     type: String,
     required: true,
-    unique: true,
   },
   candidateName: {
     type: String,
@@ -16,6 +15,9 @@ const CampaignSchema = new mongoose.Schema({
     required: true,
   },
   campaignLogo: {
+    type: String,
+  },
+  campaignAdress: {
     type: String,
   },
 }, {
