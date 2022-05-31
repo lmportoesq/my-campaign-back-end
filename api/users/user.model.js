@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 const bcrypt = require('bcrypt');
+const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
 
 const UserSchema = new mongoose.Schema({
   campaign:{
