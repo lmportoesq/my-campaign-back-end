@@ -14,6 +14,9 @@ const CampaignSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  campaignAdress: {
+    type: String,
+  },
   campaignLogo: {
     type: String,
   },
