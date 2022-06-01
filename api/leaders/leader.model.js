@@ -24,6 +24,9 @@ const LeaderSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  photo: {
+    type: String,
+  },
 }, {
   timestamps: true,
   versionKey: false,
