@@ -6,7 +6,7 @@ const authLocal = require('./auth/local');
 
 function routes(app){
   app.use('/api/users', users);
-  app.use('/api/leader', leaders);
+  app.use('/api/leaders', leaders);
   app.use('/api/campaigns', campaigns);
   app.use('/auth/local', authLocal);
 }

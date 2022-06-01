@@ -4,7 +4,7 @@ const {
   handlerGetAllLeaders,
   handlerGetOneLeader,
   handlerUpdateLeader,
-} = require('./Leader.controller');
+} = require('./leader.controller');
 
 const router = Router();
 router.post('/', handlerCreateLeader);
