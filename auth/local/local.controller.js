@@ -2,7 +2,6 @@ const { getUserByEmail, findOneUser } = require('../../api/users/user.services')
 const { signToken } = require('../auth.service');
 
 async function handlerLoginUser(req, res) {
-  console.log('Estoy en handlerLoginUser...')
   const { email, password } = req.body;
 
   try {
