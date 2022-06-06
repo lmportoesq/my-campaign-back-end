@@ -14,15 +14,18 @@ const LeaderSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
-  leaderType: {
+  adress: {
     type: String,
     required: true,
-    trim: true,
   },
   phoneNumber: {
     type: Number,
     required: true,
     trim: true,
+  },
+  leaderType: {
+    type: String,
+    required: true,
   },
   photo: {
     type: String,
