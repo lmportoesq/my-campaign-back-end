@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
-const LeaderSchema = new mongoose.Schema({
+const FollowerSchema = new mongoose.Schema({
   leader: {
     type: ObjectId,
     ref: 'Leaders'
@@ -44,4 +44,4 @@ const LeaderSchema = new mongoose.Schema({
   versionKey: false,
 });
 
-module.exports = mongoose.model('Leader',LeaderSchema)
+module.exports = mongoose.model('Follower',FollowerSchema)
