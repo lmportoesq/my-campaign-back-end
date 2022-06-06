@@ -14,6 +14,18 @@ const LeaderSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+    uppercase: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+  },
   adress: {
     type: String,
     required: true,
