@@ -17,7 +17,10 @@ const RejectedSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  Name: {
+  firstName: {
+    type: String,
+  },
+  lastName: {
     type: String,
   },
 }, {
