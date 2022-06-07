@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 const RejectedSchema = new mongoose.Schema({
-  leaderRejected: {
+  leader: {
     type: ObjectId,
     ref: 'Leaders'
   },
