@@ -15,6 +15,15 @@ async function getFollowerById(id) {
   return follower;
 }
 
+async function getFollowersByFilter(filterConditions) {
+  const followersFiltered = await Follower.find( filterConditions );
+
+  if (!followersFiltered) {
+    return null;
+  }
+  return followersFiltered;
+}
+
 async function findOneFollower(query) {
   const follower = await Follower.findOne(query);
   return follower;
@@ -36,5 +45,6 @@ module.exports = {
   findOneFollower,
   getAllFollowers,
   getFollowerById,
+  getFollowersByFilter,
   updateFollower,
 };
