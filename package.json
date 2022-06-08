@@ -20,6 +20,7 @@
   "homepage": "https://github.com/lmportoesq/my-campaign-back-end#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cloudinary": "^1.30.0",
     "composable-middleware": "^0.3.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
