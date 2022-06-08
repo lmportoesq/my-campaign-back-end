@@ -2,6 +2,7 @@ const {
   createFollower,
   getAllFollowers,
   getFollowerById,
+  getFollowersByFilter,
   updateFollower,
   deleteFollower,
 } = require('./followers.services');
@@ -18,10 +19,12 @@ async function handlerCreateFollower(req, res) {
 
 async function handlerGetAllFollowers(req, res) {
   const filterConditions = req.query;
+
   if (Object.keys(filterConditions).length === 0) {
     const follower = await getAllFollowers();
     res.status(201).json(follower);
   } else {
+    const follower = await getFollowersByFilter(filterConditions);
     res.status(201).json(follower);
   }
 }
