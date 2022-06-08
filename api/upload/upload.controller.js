@@ -5,7 +5,6 @@ const cloudinary = require('cloudinary').v2;
 async function uploadImage(image) {
   try {
     const result = await cloudinary.uploader.upload(image);
-    console.log('uploadImage function Result: ', result);
     return result;
   } catch (error) {
     console.log(error);
