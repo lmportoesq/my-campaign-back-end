@@ -2,6 +2,7 @@ const {
   createRejected,
   getAllRejecteds,
   getRejectedById,
+  getRejectedByFilter,
   updateRejected,
   deleteRejected,
 } = require('./rejected.services');
@@ -22,6 +23,7 @@ async function handlerGetAllRejecteds(req, res) {
     const rejected = await getAllRejecteds();
     res.status(201).json(rejected);
   } else {
+    const rejected = await getRejectedByFilter(filterConditions);
     res.status(201).json(rejected);
   }
 }

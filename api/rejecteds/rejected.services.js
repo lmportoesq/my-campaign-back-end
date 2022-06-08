@@ -15,6 +15,15 @@ async function getRejectedById(id) {
   return rejected;
 }
 
+async function getRejectedByFilter(filterConditions) {
+  const rejectedFiltered = await Rejected.find( filterConditions );
+
+  if (!rejectedFiltered) {
+    return null;
+  }
+  return rejectedFiltered;
+}
+
 async function findOneRejected(query) {
   const rejected = await Rejected.findOne(query);
   return rejected;
@@ -36,5 +45,6 @@ module.exports = {
   findOneRejected,
   getAllRejecteds,
   getRejectedById,
+  getRejectedByFilter,
   updateRejected,
 };
