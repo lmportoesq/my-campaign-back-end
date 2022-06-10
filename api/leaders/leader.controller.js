@@ -3,7 +3,7 @@ const {
   getAllLeaders,
   getLeaderById,
   updateLeader,
-} = require('./Leader.services');
+} = require('./leader.services');
 
 async function handlerCreateLeader(req, res) {
   const newLeader = req.body;
