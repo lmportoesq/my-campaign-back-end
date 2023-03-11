@@ -1,4 +1,3 @@
-const req = require('express/lib/request');
 const users = require('./api/users');
 const leaders = require('./api/leaders');
 const followers = require('./api/followers');
