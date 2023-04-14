@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
-
 const bcrypt = require('bcrypt');
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
 
 const UserSchema = new mongoose.Schema({
   campaign:{
-    type:ObjectId,
-    ref:'Campaigns'
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Campaign'
   },
   email: {
     type: String,
@@ -74,13 +71,16 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
 
 UserSchema.virtual('profile').get(function () {
   const {
-    firstName, lastName, role, email,
+    firstName, lastName, role, email, campaign
   } = this;
 
   return {
     fullName: `${firstName} ${lastName}`,
     role,
     email,
+    campaignType:`${campaign.campaignType}`,
+    candidateName:`${campaign.candidateName}`,
+    campaignSlogan:`${campaign.campaignSlogan}`
   };
 });
 
