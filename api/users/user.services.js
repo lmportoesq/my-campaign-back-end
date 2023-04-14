@@ -21,7 +21,7 @@ async function findOneUser(query) {
 }
 
 async function getUserByEmail(email) {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).populate('campaign');
   return user;
 }
 
