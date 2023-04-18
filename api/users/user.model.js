@@ -78,6 +78,7 @@ UserSchema.virtual('profile').get(function () {
     fullName: `${firstName} ${lastName}`,
     role,
     email,
+    campaign_id:`${campaign._id}`,
     campaignType:`${campaign.campaignType}`,
     candidateName:`${campaign.candidateName}`,
     campaignSlogan:`${campaign.campaignSlogan}`
