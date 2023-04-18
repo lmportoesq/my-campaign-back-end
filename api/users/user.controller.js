@@ -27,7 +27,7 @@ async function handlerCreateUser(req, res) {
       dynamic_template_data: {
         firstName: newUser.firstName,
         lastName: newUser.lastName,
-        url: `http://localhost:8080/active/${hash}`
+        url: `http://localhost:3000/active/${hash}`
       },
     };
 

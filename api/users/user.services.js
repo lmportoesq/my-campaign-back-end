@@ -16,7 +16,7 @@ async function getUserById(id) {
 }
 
 async function findOneUser(query) {
-  const user = await User.findOne(query);
+  const user = await User.findOne(query).populate('campaign');
   return user;
 }
 
