@@ -6,8 +6,17 @@ async function createUser(user) {
 }
 
 async function getAllUsers() {
-  const users = await User.find({});
+  const users = await User.find();
   return users;
+}
+
+async function getUsersByFilter(filterConditions) {
+  const UsersFiltered = await User.find( filterConditions );
+
+  if (!UsersFiltered) {
+    return null;
+  }
+  return UsersFiltered;
 }
 
 async function getUserById(id) {
@@ -40,6 +49,7 @@ module.exports = {
   deleteUser,
   findOneUser,
   getAllUsers,
+  getUsersByFilter,
   getUserByEmail,
   getUserById,
   updateUser,
