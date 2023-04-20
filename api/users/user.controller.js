@@ -1,6 +1,7 @@
 const {
   createUser,
   getAllUsers,
+  getUsersByFilter,
   getUserByEmail,
   getUserById,
   updateUser,
@@ -42,12 +43,12 @@ async function handlerCreateUser(req, res) {
 
 async function handlerGetAllUsers(req, res) {
   const filterConditions = req.query;
+  
   if (Object.keys(filterConditions).length === 0) {
     const users = await getAllUsers();
     res.status(201).json(users);
   } else {
-    const { email } = filterConditions;
-    const users = await getUserByEmail(email);
+    const users = await getUsersByFilter(filterConditions);
     res.status(201).json(users);
   }
 }
