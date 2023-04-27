@@ -3,24 +3,21 @@ const mongoose = require('mongoose');
 const CampaignSchema = new mongoose.Schema({
   campaignType: {
     type: String,
-    required: true,
+    required: true
   },
   candidateName: {
     type: String,
     required: true,
-    uppercase: true,
+    uppercase: true
   },
   campaignSlogan: {
     type: String,
-    required: true,
+    required: true
   },
   campaignAdress: {
-    type: String,
+    type: String
   },
   campaignLogo: {
-    type: String,
-  },
-  campaignAdress: {
     type: String,
   },
 }, {
