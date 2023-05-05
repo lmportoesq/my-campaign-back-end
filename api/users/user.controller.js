@@ -43,7 +43,7 @@ async function handlerCreateUser(req, res) {
 
 async function handlerGetAllUsers(req, res) {
   const filterConditions = req.query;
-  
+
   if (Object.keys(filterConditions).length === 0) {
     const users = await getAllUsers();
     res.status(201).json(users);
