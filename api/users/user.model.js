@@ -104,7 +104,8 @@ UserSchema.virtual('profile').get(function () {
     campaign_id: `${campaign._id}`,
     campaignType: `${campaign.campaignType}`,
     candidateName: `${campaign.candidateName}`,
-    campaignSlogan: `${campaign.campaignSlogan}`
+    campaignSlogan: `${campaign.campaignSlogan}`,
+    campaignAdress: `${campaign.campaignAdress}`
   };
 });
 
