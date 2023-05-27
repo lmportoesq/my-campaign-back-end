@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 const FollowerSchema = new mongoose.Schema({
+  campaign: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Campaign'
+  },
   leader: {
     type: ObjectId,
     ref: 'Leaders'
