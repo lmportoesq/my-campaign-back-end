@@ -20,9 +20,6 @@ const CampaignSchema = new mongoose.Schema({
   campaignLogo: {
     type: String,
   },
-  campaignAdress: {
-    type: String,
-  },
 }, {
   timestamps: true,
   versionKey: false,
