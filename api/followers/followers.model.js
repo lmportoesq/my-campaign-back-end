@@ -9,8 +9,8 @@ const FollowerSchema = new mongoose.Schema({
     ref: 'Campaign'
   },
   leader: {
-    type: ObjectId,
-    ref: 'Leaders'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   docIdent: {
     type: Number,
