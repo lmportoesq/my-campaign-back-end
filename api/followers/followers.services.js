@@ -6,7 +6,7 @@ async function createFollower(follower) {
 }
 
 async function getAllFollowers() {
-  const followers = await Follower.find({});
+  const followers = await Follower.find({}).populate('leader');
   return followers;
 }
 
