@@ -16,7 +16,7 @@ async function getFollowerById(id) {
 }
 
 async function getFollowersByFilter(filterConditions) {
-  const followersFiltered = await Follower.find( filterConditions );
+  const followersFiltered = await Follower.find( filterConditions ).populate('leader');
 
   if (!followersFiltered) {
     return null;
