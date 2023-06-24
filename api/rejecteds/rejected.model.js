@@ -1,27 +1,18 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
 const RejectedSchema = new mongoose.Schema({
-  leader: {
-    type: ObjectId,
-    ref: 'Leaders'
-  },
-  leaderContainer: {
-    type: ObjectId,
-    ref: 'Leaders'
-  },
   docIdent: {
     type: Number,
     required: true,
     trim: true,
   },
-  firstName: {
-    type: String,
+  leaderRejected: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
-  lastName: {
-    type: String,
+  leaderContainer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
 }, {
   timestamps: true,
