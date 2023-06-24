@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
 const FollowerSchema = new mongoose.Schema({
   campaign: {
     type: mongoose.Schema.Types.ObjectId,
