@@ -20,19 +20,21 @@ async function handlerCreateUser(req, res) {
     newUser.passwordResetToken = hash;
     newUser.passwordResetExpires = Date.now() + 3600000 * 24;
 
-    const data = {
-      from: '"no-reply" <lmportoesq@gmail.com>',
-      to: newUser.email,
-      subject: 'Active your account template',
-      template_id: 'd-3f4fc4ae0d38415bb2392ff219ae1448',
-      dynamic_template_data: {
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        url: `http://localhost:3000/active/${hash}`
-      },
-    };
-
-    await sendMailSendGrid(data);
+    if(newUser.sendEmail){
+      const data = {
+        from: '"no-reply" <lmportoesq@gmail.com>',
+        to: newUser.email,
+        subject: 'Active your account template',
+        template_id: 'd-3f4fc4ae0d38415bb2392ff219ae1448',
+        dynamic_template_data: {
+          firstName: newUser.firstName,
+          lastName: newUser.lastName,
+          url: `http://localhost:3000/active/${hash}`
+        },
+      };
+      await sendMailSendGrid(data);
+    }
+    
     const user = await createUser(newUser);
 
     res.status(201).json(user);

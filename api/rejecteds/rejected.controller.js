@@ -18,6 +18,7 @@ async function handlerCreateRejected(req, res) {
 }
 
 async function handlerGetAllRejecteds(req, res) {
+  
   const filterConditions = req.query;
   if (Object.keys(filterConditions).length === 0) {
     const rejected = await getAllRejecteds();

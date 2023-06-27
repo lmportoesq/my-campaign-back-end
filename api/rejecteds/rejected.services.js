@@ -16,7 +16,8 @@ async function getRejectedById(id) {
 }
 
 async function getRejectedByFilter(filterConditions) {
-  const rejectedFiltered = await Rejected.find( filterConditions );
+  const rejectedFiltered = await Rejected.find( filterConditions ).populate('follower');
+  console.log('EStoy en mi servicio rehjectebyfilter...',rejectedFiltered)
 
   if (!rejectedFiltered) {
     return null;
