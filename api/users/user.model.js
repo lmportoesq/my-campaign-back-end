@@ -35,6 +35,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  sendEmail: {
+    type: Boolean,
+    default: false,
+  },
   role: {
     type: String,
     default: 'leader',
