@@ -1,3 +1,4 @@
+const { createRejected } = require('../rejecteds/rejected.services');
 const {
   createFollower,
   getAllFollowers,
@@ -5,6 +6,7 @@ const {
   getFollowersByFilter,
   updateFollower,
   deleteFollower,
+  getFollowerByDocIdent
 } = require('./followers.services');
 
 async function handlerCreateFollower(req, res) {
@@ -13,7 +15,15 @@ async function handlerCreateFollower(req, res) {
     const follower = await createFollower(newFollower);
     res.status(201).json(follower);
   } catch (error) {
-    res.status(500).json(error);
+
+    if (error.code == 11000) {
+      const oldFollower = await getFollowerByDocIdent(error.keyValue.docIdent);
+      console.log(oldFollower);
+      await createRejected({follower: oldFollower._id.toString(), leaderRejected: newFollower.leader})
+      res.status(500).json({...error, oldFollower: oldFollower});
+    } else {
+      res.status(500).json(error);
+    }
   }
 }
 
@@ -41,8 +51,8 @@ async function handlerGetOneFollower(req, res) {
 
 async function handlerUpdateFollower(req, res) {
   const { id } = req.params;
-  const newInfo=req.body;
-  const follower = await updateFollower(id,newInfo);
+  const newInfo = req.body;
+  const follower = await updateFollower(id, newInfo);
 
   if (!follower) {
     return res.status(404);
@@ -59,7 +69,7 @@ async function handlerDeleteFollower(req, res) {
     return res.status(404);
   }
 
-  return res.status(200).json({message:'Usuario fue eliminado...!'});
+  return res.status(200).json({ message: 'Usuario fue eliminado...!' });
 }
 
 module.exports = {

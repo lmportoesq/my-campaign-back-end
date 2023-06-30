@@ -1,13 +1,43 @@
 const Rejected = require('./rejected.model');
 
 async function createRejected(rejected) {
-  const newRejected = await Rejected.create(rejected);
-  return newRejected;
+  const flagValidate = await validateRejected(rejected);
+
+  if (flagValidate) {
+    const newRejected = await Rejected.create(rejected);
+    return newRejected;
+  }
+
+  return null
 }
 
 async function getAllRejecteds() {
-  const rejecteds = await Rejected.find({});
+  const rejecteds = await Rejected.find({})
+    .populate({
+      path: 'follower',
+      select: 'campaign docIdent firstName lastName',
+      populate: {
+        path: 'leader',
+        select: 'firstName lastName docIdent'
+      }
+    })
+    .populate({
+      path: 'leaderRejected',
+      select: 'firstName lastName docIdent'
+    });
   return rejecteds;
+}
+
+async function validateRejected(data) {
+  const rejected = await Rejected.findOne()
+    .where('follower').equals(data.follower)
+    .where('leaderRejected').equals(data.leaderRejected)
+
+  if (rejected) {
+    return false
+  } else {
+    return true
+  }
 }
 
 async function getRejectedById(id) {
@@ -16,8 +46,21 @@ async function getRejectedById(id) {
 }
 
 async function getRejectedByFilter(filterConditions) {
-  const rejectedFiltered = await Rejected.find( filterConditions ).populate('follower');
-  console.log('EStoy en mi servicio rehjectebyfilter...',rejectedFiltered)
+  const rejectedFiltered = await Rejected.find(filterConditions)
+    .populate({
+      path: 'follower',
+      select: 'campaign docIdent firstName lastName',
+      populate: {
+        path: 'leader',
+        select: 'firstName lastName docIdent'
+      }
+    })
+    .populate({
+      path: 'leaderRejected',
+      select: 'firstName lastName docIdent'
+    });
+
+  console.log('EStoy en mi servicio rehjectebyfilter...', rejectedFiltered)
 
   if (!rejectedFiltered) {
     return null;
@@ -30,8 +73,8 @@ async function findOneRejected(query) {
   return rejected;
 }
 
-async function updateRejected(id,newInfo) {
-  const updatedRejected = await Rejected.findByIdAndUpdate(id,newInfo,{ new: true });
+async function updateRejected(id, newInfo) {
+  const updatedRejected = await Rejected.findByIdAndUpdate(id, newInfo, { new: true });
   return updatedRejected;
 }
 
@@ -48,4 +91,5 @@ module.exports = {
   getRejectedById,
   getRejectedByFilter,
   updateRejected,
+  validateRejected
 };

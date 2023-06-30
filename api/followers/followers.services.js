@@ -15,8 +15,17 @@ async function getFollowerById(id) {
   return follower;
 }
 
+async function getFollowerByDocIdent(docIdent) {
+  const follower = await Follower.findOne({ docIdent: docIdent })
+    .populate({
+      path: 'leader',
+      select: 'docIdent firstName lastName',
+    });
+  return follower;
+}
+
 async function getFollowersByFilter(filterConditions) {
-  const followersFiltered = await Follower.find( filterConditions ).populate('leader');
+  const followersFiltered = await Follower.find(filterConditions).populate('leader');
 
   if (!followersFiltered) {
     return null;
@@ -29,8 +38,8 @@ async function findOneFollower(query) {
   return follower;
 }
 
-async function updateFollower(id,newInfo) {
-  const updatedFollower = await Follower.findByIdAndUpdate(id,newInfo,{ new: true });
+async function updateFollower(id, newInfo) {
+  const updatedFollower = await Follower.findByIdAndUpdate(id, newInfo, { new: true });
   return updatedFollower;
 }
 
@@ -47,4 +56,5 @@ module.exports = {
   getFollowerById,
   getFollowersByFilter,
   updateFollower,
+  getFollowerByDocIdent
 };
