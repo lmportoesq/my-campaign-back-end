@@ -6,6 +6,7 @@ const {
   getUserById,
   updateUser,
   deleteUser,
+  getUserByDocIdentAndCampaign
 } = require('./user.services');
 
 const crypto = require('crypto');
@@ -13,6 +14,11 @@ const { sendMailSendGrid } = require('../../utils/emails');
 
 async function handlerCreateUser(req, res) {
   const newUser = req.body;
+  const leaderFounded = await getUserByDocIdentAndCampaign(newUser.docIdent, newUser.campaign);
+  if(leaderFounded){
+    return
+  }
+
   try {
     const hash = crypto.createHash('sha256')
       .update(newUser.email)

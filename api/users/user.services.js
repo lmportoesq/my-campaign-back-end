@@ -44,6 +44,13 @@ async function deleteUser(id) {
   return deletedUser;
 }
 
+async function getUserByDocIdentAndCampaign(docIdent, campaign) {
+  //const leader = docIdent + campaign
+  //console.log('ESTE ES EL LIDER A BUSCAR...',docIdent)
+  const user = await User.findOne({ docIdent: docIdent, campaign: campaign })
+  return user;
+}
+
 module.exports = {
   createUser,
   deleteUser,
@@ -53,4 +60,5 @@ module.exports = {
   getUserByEmail,
   getUserById,
   updateUser,
+  getUserByDocIdentAndCampaign
 };
