@@ -18,7 +18,6 @@ async function handlerCreateFollower(req, res) {
 
     if (error.code == 11000) {
       const oldFollower = await getFollowerByDocIdent(error.keyValue.docIdent);
-      console.log(oldFollower);
       await createRejected({follower: oldFollower._id.toString(), leaderRejected: newFollower.leader})
       res.status(500).json({...error, oldFollower: oldFollower});
     } else {
