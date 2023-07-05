@@ -44,6 +44,11 @@ async function deleteUser(id) {
   return deletedUser;
 }
 
+async function findByDocAndCampaign(docIdent, campaign) {
+  const res = await User.findOne({ docIdent: docIdent, campaign: campaign })
+  return res;
+}
+
 module.exports = {
   createUser,
   deleteUser,
@@ -52,5 +57,6 @@ module.exports = {
   getUsersByFilter,
   getUserByEmail,
   getUserById,
-  updateUser
+  updateUser,
+  findByDocAndCampaign
 };

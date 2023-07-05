@@ -5,41 +5,52 @@ const {
   getUserByEmail,
   getUserById,
   updateUser,
-  deleteUser
+  deleteUser,
+  findByDocAndCampaign
 } = require('./user.services');
 
 const crypto = require('crypto');
 const { sendMailSendGrid } = require('../../utils/emails');
 
-async function handlerCreateUser(req, res) {
-  const newUser = req.body;
+async function handlerCreateUser( req, res){
+  const newUser = req.body
   try {
-    const hash = crypto.createHash('sha256')
-      .update(newUser.email)
-      .digest('hex');
-    newUser.passwordResetToken = hash;
-    newUser.passwordResetExpires = Date.now() + 3600000 * 24;
-
-    if(newUser.sendEmail){
-      const data = {
-        from: '"no-reply" <lmportoesq@gmail.com>',
-        to: newUser.email,
-        subject: 'Active your account template',
-        template_id: 'd-3f4fc4ae0d38415bb2392ff219ae1448',
-        dynamic_template_data: {
-          firstName: newUser.firstName,
-          lastName: newUser.lastName,
-          url: `http://localhost:3000/active/${hash}`
-        },
-      };
-      await sendMailSendGrid(data);
+    const founded = await findByDocAndCampaign(newUser.docIdent, newUser.campaign);
+    if(founded){
+      return res.status(200).json({foundedDocAndCampaing: true})
     }
-    
-    const user = await createUser(newUser);
-
-    res.status(201).json(user);
+    const foundedEmail = await getUserByEmail(newUser.email);
+    if(foundedEmail){
+      return res.status(200).json({foundedEmail: true})
+    }
+    try {
+      const hash = crypto.createHash('sha256')
+        .update(newUser.email)
+        .digest('hex');
+        newUser.passwordResetToken = hash;
+        newUser.passwordResetExpires = Date.now() + 3600000 * 24;
+  
+      if(newUser.sendEmail){
+        const data = {
+          from: '"no-reply" <lmportoesq@gmail.com>',
+          to: newUser.email,
+          subject: 'Active your account template',
+          template_id: 'd-3f4fc4ae0d38415bb2392ff219ae1448',
+          dynamic_template_data: {
+            firstName: body.firstName,
+            lastName: body.lastName,
+            url: `http://localhost:3000/active/${hash}`
+          },
+        };
+        await sendMailSendGrid(data);
+      }
+      const user = await createUser(newUser);
+      return res.status(201).json(user);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error)
   }
 }
 
@@ -104,5 +115,5 @@ module.exports = {
   handlerGetUserByEmail,
   handlerGetOneUser,
   handlerUpdateUser,
-  handlerDeleteUser,
+  handlerDeleteUser
 };

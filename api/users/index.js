@@ -9,7 +9,7 @@ const {
 
 //const { isAuthenticated } = require('../../auth/auth.service');
 const router = Router();
-router.post('/', handlerCreateUser);
+router.post('/',handlerCreateUser);
 
 router.get('/', handlerGetAllUsers);
 router.get('/:id', handlerGetOneUser);
