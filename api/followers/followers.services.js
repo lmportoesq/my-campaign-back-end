@@ -48,6 +48,11 @@ async function deleteFollower(id) {
   return deletedFollower;
 }
 
+async function findByDocAndCampaign(docIdent, campaign) {
+  const res = await Follower.findOne({ docIdent: docIdent, campaign: campaign })
+  return res;
+}
+
 module.exports = {
   createFollower,
   deleteFollower,
@@ -56,5 +61,6 @@ module.exports = {
   getFollowerById,
   getFollowersByFilter,
   updateFollower,
-  getFollowerByDocIdent
+  getFollowerByDocIdent,
+  findByDocAndCampaign
 };

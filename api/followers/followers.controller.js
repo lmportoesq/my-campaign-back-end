@@ -6,24 +6,25 @@ const {
   getFollowersByFilter,
   updateFollower,
   deleteFollower,
-  getFollowerByDocIdent
+  getFollowerByDocIdent,
+  findByDocAndCampaign
 } = require('./followers.services');
 
 async function handlerCreateFollower(req, res) {
   const newFollower = req.body;
   try {
-    const follower = await createFollower(newFollower);
-    res.status(201).json(follower);
-  } catch (error) {
-
-    if (error.code == 11000) {
-      const oldFollower = await getFollowerByDocIdent(error.keyValue.docIdent);
-      await createRejected({follower: oldFollower._id.toString(), leaderRejected: newFollower.leader})
-      res.status(500).json({...error, oldFollower: oldFollower});
-    } else {
-      res.status(500).json(error);
+    const founded = await findByDocAndCampaign(newFollower.docIdent, newFollower.campaign);
+    if(founded){
+      const oldFollower = await getFollowerByDocIdent(newFollower.docIdent);
+      const rr= await createRejected({follower: oldFollower._id.toString(), leaderRejected: newFollower.leader});
+      res.status(500).json({...newFollower, oldFollower: oldFollower});
+    }else{
+      const follower = await createFollower(newFollower);
+      return res.status(201).json(follower);  
     }
-  }
+  } catch (error) {
+    res.status(500).json(error);
+  }    
 }
 
 async function handlerGetAllFollowers(req, res) {

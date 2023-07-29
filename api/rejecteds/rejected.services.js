@@ -60,8 +60,6 @@ async function getRejectedByFilter(filterConditions) {
       select: 'firstName lastName docIdent'
     });
 
-  console.log('EStoy en mi servicio rehjectebyfilter...', rejectedFiltered)
-
   if (!rejectedFiltered) {
     return null;
   }

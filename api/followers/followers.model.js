@@ -12,8 +12,7 @@ const FollowerSchema = new mongoose.Schema({
   docIdent: {
     type: Number,
     required: true,
-    trim: true,
-    unique: true,
+    trim: true
   },
   firstName: {
     type: String,
